@@ -137,15 +137,15 @@ extension MyMatchesTableVC: HttpHelperDelegate {
             cell.lblDate.text = Matchs[indexPath.row]._date
             cell.lblGroundName.text = Matchs[indexPath.row]._ground_name
             cell.lblTime.text = Matchs[indexPath.row]._time
-            cell.lblUserNAme.text = Matchs[indexPath.row]._user_name
+            cell.lblUName.text = Matchs[indexPath.row]._user_name
             print(Matchs[indexPath.row]._photo)
             if Matchs[indexPath.row]._photo != "" {
-            cell.imgUser.loadimageUsingUrlString(url: Matchs[indexPath.row]._photo)
+            cell.imgUser.loadimageUsingUrlString(url:"\(APIConstants.Base_Image_URL)\(Matchs[indexPath.row]._photo)")
             }
             
             print(Matchs[indexPath.row]._ground_image)
             if Matchs[indexPath.row]._ground_image != "" {
-            cell.imgGround.loadimageUsingUrlString(url: Matchs[indexPath.row]._ground_image)
+            cell.imgGround.loadimageUsingUrlString(url:"\(APIConstants.Base_Image_URL)\(Matchs[indexPath.row]._ground_image)")
             }
             return cell
         }
@@ -156,6 +156,7 @@ extension MyMatchesTableVC: HttpHelperDelegate {
                 let cont = storyBoard.instantiateViewController(withIdentifier: "MyMatchVC")as! MyMatchVC
                 cont.comeFrom = "MyMatch"
                 cont.match = Matchs[indexPath.row]
+                cont.comeFrom = "MyMatches"
                 self.present(cont, animated: true, completion: nil)
                 print(123)
         }

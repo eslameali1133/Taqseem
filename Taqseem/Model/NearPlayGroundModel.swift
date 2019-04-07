@@ -1,15 +1,15 @@
 //
-//  PlaygroundModel.swift
+//  NearPlayGroundModel.swift
 //  Taqseem
 //
-//  Created by Husseinomda16 on 3/18/19.
+//  Created by Husseinomda16 on 3/27/19.
 //  Copyright © 2019 OnTime. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class PlaygroundModelClass: NSObject {
+class NearPlayGroundModelClass: NSObject {
     var _owner_id = ""
     var _updated_at = ""
     var _name = ""
@@ -30,8 +30,11 @@ class PlaygroundModelClass: NSObject {
     var _cancel_fee = ""
     var _price = ""
     var _cancelation_time = ""
-    var _days = ""
-    var _matches = ""
+    var _member = ""
+    var _reservation_no = ""
+    var _duration = ""
+    var _time = ""
+    var _date = ""
     
     init(owner_id:String ,
          updated_at : String ,
@@ -53,9 +56,12 @@ class PlaygroundModelClass: NSObject {
          cancel_fee :String,
          price :String,
          cancelation_time :String,
-        days :String,
-        matches :String
-        ) {
+         member :String,
+         reservation_no :String,
+         duration :String,
+         time :String,
+         date :String
+    ) {
         
         self._owner_id = owner_id
         self._updated_at = updated_at
@@ -77,7 +83,10 @@ class PlaygroundModelClass: NSObject {
         self._cancel_fee = cancel_fee
         self._price = price
         self._cancelation_time = cancelation_time
-        self._days = days
-        self._matches = matches
+        self._member = member
+        self._duration = duration
+        self._time = time
+        self._date = date
+        self._reservation_no = reservation_no
     }
 }

@@ -14,6 +14,7 @@ class ChoosebackgroundCell: UITableViewCell {
     var http = HttpHelper()
     var MatchDetails : MatchDetailsModelClass!
     var items : PlaygroundModelClass!
+    var NearItems : NearPlayGroundModelClass!
     @IBOutlet weak var imgGround: customImageView!{
         didSet{
             
@@ -30,6 +31,7 @@ class ChoosebackgroundCell: UITableViewCell {
         http.delegate = self
         // Initialization code
         viewcontent.dropShadow()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -64,28 +66,28 @@ class ChoosebackgroundCell: UITableViewCell {
     }
     
     @IBAction func btnChoose(_ sender: Any) {
-        if comedromneartoplay == true
+        if comedromneartoplay == "NearME"
                 {
-                    print(items._capacity)
+                    
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Match", bundle:nil)
                     let cont = storyBoard.instantiateViewController(withIdentifier: "MyMatchVC")as! MyMatchVC
-                    
-                    
+
+
+                    cont.NearItems = NearItems
                     let currentController = self.getCurrentViewController()
                     currentController?.present(cont, animated: true, completion: nil)
-        
+
                 }else{
         
                     let storyBoard : UIStoryboard = UIStoryboard(name: "Match", bundle:nil)
                     let cont = storyBoard.instantiateViewController(withIdentifier: "playGroundDetailsVC")as! playGroundDetailsVC
-            
+        
                     cont.item = items
-            cont.MatchDetails = MatchDetails
-            
+                    cont.MatchDetails = MatchDetails
             let currentController = self.getCurrentViewController()
             currentController?.present(cont, animated: true, completion: nil)
         
-                }
+               }
             }
     
     func getCurrentViewController() -> UIViewController? {

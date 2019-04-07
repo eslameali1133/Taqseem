@@ -24,7 +24,7 @@ class BookPlayGroundVC: UIViewController , UIPickerViewDelegate , UIPickerViewDa
     var Duration = [0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10]
     var TeamCapacity = [0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12]
     
-    
+    var PTime = ""
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblCapacity: UILabel!
     @IBOutlet weak var lblDuration: UILabel!
@@ -73,9 +73,10 @@ class BookPlayGroundVC: UIViewController , UIPickerViewDelegate , UIPickerViewDa
     }
     
     @IBAction func btnSearch(_ sender: Any) {
-        
+        comedromneartoplay = ""
         MatchDetails = MatchDetailsModelClass(
             Time: lblTime.text!,
+            PTime: PTime,
             Date: lblDate.text!,
             Duration: lblDuration.text!,
             Capacity:lblCapacity.text!,
@@ -134,11 +135,14 @@ class BookPlayGroundVC: UIViewController , UIPickerViewDelegate , UIPickerViewDa
                 dateformatter.dateFormat = "ss"
                 //  let Sec = dateformatter.string(from: datee!)
                 let Time24 = "\(hou):\(Min):00"
+                PTime = "\(hou):\(Min)"
                 lblTime.text = Time24
             }else {
                 
                 dateformatter.dateFormat = "HH:mm:00"
                 let Time24 = dateformatter.string(from : datee!)
+                dateformatter.dateFormat = "HH:mm"
+                PTime = dateformatter.string(from : datee!)
                 lblTime.text = Time24
             }
         }else {
@@ -294,6 +298,19 @@ extension BookPlayGroundVC: HttpHelperDelegate {
                 items.removeAll()
                 let result =  json["data"].arrayValue
                 for json in result{
+                    
+                    
+                    print(json["days"].arrayValue)
+                    var str:[String] = []
+//                    if json["days"].array!.count > 0
+//                    {
+//                        for i in json["days"].array!{
+//                            str.append(i.stringValue)
+//                        }
+//                    }
+//                    print(str.joined(separator: ","))
+//
+                    
                     let obj = PlaygroundModelClass(
                         owner_id: json["owner_id"].stringValue,
                         updated_at: json["updated_at"].stringValue,
@@ -314,7 +331,9 @@ extension BookPlayGroundVC: HttpHelperDelegate {
                         hour_from: json["hour_from"].stringValue,
                         cancel_fee: json["cancel_fee"].stringValue,
                         price: json["price"].stringValue,
-                        cancelation_time: json["cancelation_time"].stringValue
+                        cancelation_time: "",
+                        days:str.joined(separator: ","),
+                        matches: ""
                         
                     )
                     items.append(obj)

@@ -10,10 +10,14 @@ import UIKit
 
 var GMatchDetails : MatchDetailsModelClass!
 var Gitem : PlaygroundModelClass!
-
+var GNearItems : NearPlayGroundModelClass!
+var GFav : NearPlayGroundModelClass!
 class playGroundDetailsVC: UIViewController {
     var MatchDetails : MatchDetailsModelClass!
     var item : PlaygroundModelClass!
+    var NearItems : NearPlayGroundModelClass!
+    var FavItem : NearPlayGroundModelClass!
+    
     @IBOutlet weak var Constain_IconImge_Height: NSLayoutConstraint!
     @IBOutlet weak var Constain_IconImge_Widhtt: NSLayoutConstraint!
     
@@ -55,18 +59,43 @@ class playGroundDetailsVC: UIViewController {
     func fillData(){
         
         lblLocation.text = ""
-        lblName.text = item._name
-        lblSalary.text = "\(item._price) SAR/h"
-        lblAddress.text = item._address
+        if comedromneartoplay == "NearME" {
+            lblName.text = NearItems._name
+            lblSalary.text = "\(NearItems._price) SAR/h"
+            lblAddress.text = NearItems._address
+            
+            lblCapacity.text = "\(NearItems._capacity) Players"
+            lblDuration.text = "\(NearItems._duration) Hours"
+            lblTime.text = NearItems._time
+            lblDate.text = NearItems._date
+            GNearItems = NearItems
+        }else if comedromneartoplay == "Fav" {
+        lblName.text = FavItem._name
+        lblSalary.text = "\(FavItem._price) SAR/h"
+        lblAddress.text = FavItem._address
         
-        lblCapacity.text = "\(MatchDetails._Capacity) Players"
-        lblDuration.text = "\(MatchDetails._Duration) Hours"
-        lblTime.text = MatchDetails._Time
-        lblDate.text = MatchDetails._Date
+        lblCapacity.text = "\(FavItem._capacity) Players"
+        lblDuration.text = "\(FavItem._duration) Hours"
+        lblTime.text = FavItem._time
+        lblDate.text = FavItem._date
         
-        Gitem = item
-        GMatchDetails = MatchDetails
-        
+        GFav = FavItem
+            print(FavItem._duration)
+        //GMatchDetails = MatchDetails
+        }
+        else {
+            lblName.text = item._name
+            lblSalary.text = "\(item._price) SAR/h"
+            lblAddress.text = item._address
+            
+            lblCapacity.text = "\(MatchDetails._Capacity) Players"
+            lblDuration.text = "\(MatchDetails._Duration) Hours"
+            lblTime.text = MatchDetails._Time
+            lblDate.text = MatchDetails._Date
+            
+            Gitem = item
+            GMatchDetails = MatchDetails
+        }
     }
 
 }
